@@ -1,11 +1,11 @@
 <div class="flex flex-col items-center w-full py-12">
     <div class="flex justify-start w-[80%]">
-        <h2 class="text-base pb-4 md:text-xl font-semibold text-gray-800">非表示商品一覧</h2>
+        <h2 class="text-base pb-4 md:text-xl font-semibold text-gray-800">非表示投稿一覧</h2>
     </div>
 
     @foreach($hiddenPosts as $idx=>$value)
         <div class="bg-white border border-solid border-gray-200 w-[80%] shrink-0">
-            <div class="qa__head js-ac flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-6 px-2 ml-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-6 px-2 ml-4">
                 <div>
                     <p class="text-xs md:text-base lg:text-lg font-bold leading-6 opacity-90">{{$value["name"]}}</p>
                 </div>

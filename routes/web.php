@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::post("/dashboard/post",[AdminController::class,"AddPost"])->name("AddPost");
     Route::post('/dashboard/post/{id}', [AdminController::class,"UpdatePost"])->name('UpdatePost');
     Route::delete("/dashboard/post",[AdminController::class,"DeletePost"])->name("DeletePost");
-    Route::post("/dashboard/toggle-product",[AdminController::class,"ToggleProduct"])->name("ToggleProduct");
+    Route::post("/dashboard/toggle-post",[AdminController::class,"TogglePost"])->name("TogglePost");
 });
 
 require __DIR__.'/auth.php';

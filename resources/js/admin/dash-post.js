@@ -126,7 +126,7 @@ function ToggleProduct(btn) {
     let id = btn.value;
     let is_enabled = btn.checked ? 1 : 0; // チェックボックスがチェックされているかどうかでis_enabledを設定
 
-    FetchData('/dashboard/toggle-product', 'POST',true,JSON.stringify({ id: id, is_enabled: is_enabled }))
+    FetchData('/dashboard/toggle-post', 'POST',true,JSON.stringify({ id: id, is_enabled: is_enabled }))
         .then(data => {
             window.location.href = data.redirect;
         })

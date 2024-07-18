@@ -9,7 +9,7 @@ use App\Models\Post;
 
 class AdminController extends Controller
 {
-  //[ページ遷移]投稿
+    //[SHOW]投稿
     public function ShowPostPage()
     {
         $posts = Post::where('is_enabled', 1)->get();;
@@ -153,33 +153,32 @@ class AdminController extends Controller
             ], 500);
         }
     }
-    //
-    //    //[表示設定]商品
-    //    public function ToggleProduct(Request $request)
-    //    {
-    //        try {
-    //            // 商品テーブルから指定のIDのレコード1件を取得
-    //            $product = Product::find($request->id);
-    //
-    //            if (!$product) {
-    //                return response()->json(['message' => '対象商品が見つかりませんでした'], 404);
-    //            }
-    //
-    //            // レコードを更新
-    //            $product->is_enabled = $request->is_enabled;
-    //            $product->save();
-    //
-    //            // JSONレスポンスを返す
-    //            return response()->json([
-    //                'message' => '表示設定の変更が完了しました',
-    //                'redirect' => route('ShowProduct')
-    //            ]);
-    //        } catch (\Exception $e) {
-    //            // エラーが発生した場合の処理
-    //            return response()->json([
-    //                'message' => '表示設定の変更に失敗しました',
-    //                'error' => $e->getMessage()
-    //            ], 500);
-    //        }
-    //    }
+
+    //[TOGGLE]投稿
+    public function TogglePost(Request $request)
+    {
+        try {
+            $post = Post::find($request->id);
+
+            if (!$post) {
+                return response()->json(['message' => '対象投稿が見つかりませんでした'], 404);
+            }
+
+            // レコードを更新
+            $post->is_enabled = $request->is_enabled;
+            $post->save();
+
+            // JSONレスポンスを返す
+            return response()->json([
+                'message' => '表示設定の変更が完了しました',
+                'redirect' => route('ShowPostPage')
+            ]);
+        } catch (\Exception $e) {
+            // エラーが発生した場合の処理
+            return response()->json([
+                'message' => '表示設定の変更に失敗しました',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
