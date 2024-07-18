@@ -119,41 +119,40 @@ class AdminController extends Controller
         }
     }
 
+    //[DELETE]投稿
+    public function DeletePost(Request $request)
+    {
+        try {
+            // 商品テーブルから指定のIDのレコード1件を取得
+            $post = Post::find($request->id);
 
-    //    //[削除]商品
-    //    public function DeleteProduct(Request $request)
-    //    {
-    //        try {
-    //            // 商品テーブルから指定のIDのレコード1件を取得
-    //            $product = Product::find($request->id);
-    //
-    //            if (!$product) {
-    //                return response()->json([
-    //                    'message' => '削除対象の商品が見つかりませんでした',
-    //                ], 404);
-    //            }
-    //
-    //            // ディレクトリを削除
-    //            $directoryPath = 'img/' . $product->id;
-    //            if (Storage::disk('public')->exists($directoryPath)) {
-    //                Storage::disk('public')->deleteDirectory($directoryPath);
-    //            }
-    //
-    //            // レコードを削除
-    //            $product->delete();
-    //
-    //            // JSONレスポンスを返す
-    //            return response()->json([
-    //                'message' => '商品が正常に削除されました',
-    //                'redirect' => route('ShowProduct')
-    //            ]);
-    //        } catch (\Exception $e) {
-    //            return response()->json([
-    //                'message' => '商品の削除に失敗しました',
-    //                'error' => $e->getMessage()
-    //            ], 500);
-    //        }
-    //    }
+            if (!$post) {
+                return response()->json([
+                    'message' => '削除対象の投稿が見つかりませんでした',
+                ], 404);
+            }
+
+            // ディレクトリを削除
+            $directoryPath = 'img/' . $post->id;
+            if (Storage::disk('public')->exists($directoryPath)) {
+                Storage::disk('public')->deleteDirectory($directoryPath);
+            }
+
+            // レコードを削除
+            $post->delete();
+
+            // JSONレスポンスを返す
+            return response()->json([
+                'message' => '投稿が正常に削除されました',
+                'redirect' => route('ShowPostPage')
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => '投稿の削除に失敗しました',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     //
     //    //[表示設定]商品
     //    public function ToggleProduct(Request $request)

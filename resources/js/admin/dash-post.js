@@ -2,30 +2,15 @@
 const ADD_BUTTON = document.getElementById("add_post_btn");//新規登録ボタン
 const EDIT_BUTTONS = document.querySelectorAll('.editBtn');//編集ボタン
 const DELETE_BUTTONS = document.querySelectorAll('.deleteBtn');//削除ボタン
-const SUBMIT_BUTTONS = document.getElementsByClassName('submit-btn');//登録/更新ボタン
 const TOGGLE_INPUT = document.querySelectorAll('.toggleBtn');//toggle input
 const FORM_ELEMENT = document.getElementById('post_form');//新規登録form
-
-let currentIndex = null;//更新時に何番目のQuillかindexを保存
-let selectedId = null//現在の商品id
-let addUpdateFlag = false;//追加か更新か判断用
 
 EDIT_BUTTONS.forEach((btn,idx) => {
     btn.addEventListener('click', function() {
 
-        currentIndex = idx;
-        selectedId = this.getAttribute('data-product-id');
-
         let selectedAccordion = btn.parentNode.parentNode.parentNode.nextElementSibling;//アコーディオン中身
 
         ToggleAccordion(selectedAccordion, btn);
-
-        // if (selectedAccordion.classList.contains('visible')) {
-        //
-        //     if (this.classList.contains("addProductBtn")) {
-        //         addUpdateFlag = true;
-        //     }
-        // }
     });
 });
 
@@ -105,21 +90,21 @@ document.querySelectorAll('.update-btn').forEach((btn) => {
     });
 });
 
-//商品削除
+//[DELETE]投稿削除
 for (let i = 0; i < DELETE_BUTTONS.length; i++) {
     DELETE_BUTTONS[i].addEventListener('click', function () {
-        DeleteProduct(DELETE_BUTTONS[i]);
+        DeletePost(DELETE_BUTTONS[i]);
     });
 }
 
-function DeleteProduct(btn) {
-    let id = btn.getAttribute('data-product-id');
+function DeletePost(btn) {
+    let id = btn.getAttribute('data-post-id');
 
     // 確認ダイアログを表示し、ユーザーがOKを押した場合のみ削除処理を実行
     if (confirm('本当に削除しますか？')) {
 
         // Ajaxリクエストを送信して削除処理を行う
-        FetchData('/dashboard/product', 'DELETE',true,JSON.stringify({ id: id }))
+        FetchData('/dashboard/post', 'DELETE',true,JSON.stringify({ id: id }))
             .then(data => {
                 alert(data.message);
                 window.location.href = data.redirect;
