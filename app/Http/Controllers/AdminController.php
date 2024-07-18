@@ -71,69 +71,55 @@ class AdminController extends Controller
             ], 500);
         }
     }
-    //
-    //    //[更新]商品
-    //    public function UpdateProduct(Request $request, $id)
-    //    {
-    //        // 商品を取得
-    //        $product = Product::find($id);
-    //
-    //        // 画像の更新処理
-    //        if ($request->hasFile('img')) {
-    //            $fileName = $request->file('img')->getClientOriginalName();
-    //            $newImgPath = 'public/img/' . $product->id;
-    //
-    //            // 以前の画像を削除
-    //            Storage::disk('public')->deleteDirectory('img/' . $product->id);
-    //
-    //            // 新しいディレクトリを作成し、パーミッションを設定
-    //            $directoryPath = storage_path('app/public/img/' . $product->id);
-    //            if (!file_exists($directoryPath)) {
-    //                mkdir($directoryPath, 0755, true);
-    //                chmod($directoryPath, 0755);
-    //            }
-    //
-    //            // 新しい画像を保存
-    //            $request->file('img')->storeAs($newImgPath, $fileName);
-    //            $product->img = 'storage/img/' . $product->id . '/' . $fileName;
-    //        }
-    //
-    //        // 商品情報の更新
-    //        $product->name = $request->name;
-    //        $product->price = $request->price;
-    //        $product->priority = $request->priority;
-    //        $product->save();
-    //
-    //        // Quillデータの保存
-    //        DB::beginTransaction();
-    //        try {
-    //            // Detailレコードを削除
-    //            Detail::where("product_id", $id)->delete();
-    //
-    //            // 新しいQuillデータを保存
-    //            $quillData = json_decode($request->quill_data, true);
-    //            foreach ($quillData["ops"] as $value) {
-    //                $detail = new Detail();
-    //                $detail->product_id = $id;
-    //                $detail->insert = $value["insert"];
-    //                $detail->attributes = isset($value["attributes"]) ? json_encode($value["attributes"]) : null;
-    //                $detail->save();
-    //            }
-    //
-    //            DB::commit();
-    //            return response()->json([
-    //                'message' => '商品が正常に更新されました',
-    //                'redirect' => route('ShowProduct')
-    //            ], 200);
-    //        } catch (\Exception $e) {
-    //            DB::rollback();
-    //            return response()->json([
-    //                'message' => '商品更新に失敗しました',
-    //                'error' => $e->getMessage()
-    //            ], 500);
-    //        }
-    //    }
-    //
+
+    //[UPDATE]投稿
+    public function UpdatePost(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $post = Post::find($id);
+
+            // 画像の更新処理
+            if ($request->hasFile('img')) {
+                $fileName = $request->file('img')->getClientOriginalName();
+                $newImgPath = 'public/img/' . $post->id;
+
+                // 以前の画像を削除
+                Storage::disk('public')->deleteDirectory('img/' . $post->id);
+
+                // 新しいディレクトリを作成し、パーミッションを設定
+                $directoryPath = storage_path('app/public/img/' . $post->id);
+                if (!file_exists($directoryPath)) {
+                    mkdir($directoryPath, 0755, true);
+                    chmod($directoryPath, 0755);
+                }
+
+                // 新しい画像を保存
+                $request->file('img')->storeAs($newImgPath, $fileName);
+                $post->img = 'storage/img/' . $post->id . '/' . $fileName;
+            }
+
+            $post->name = $request->name;
+            $post->category = $request->category;
+            $post->save();
+
+            DB::commit();
+            return response()->json([
+                'message' => '投稿が正常に更新されました',
+                'redirect' => route('ShowPostPage')
+            ], 200);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'message' => '投稿更新に失敗しました',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     //    //[削除]商品
     //    public function DeleteProduct(Request $request)
     //    {

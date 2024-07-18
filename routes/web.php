@@ -16,10 +16,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //商品
+    //投稿
     Route::get("/dashboard/post",[AdminController::class,"ShowPostPage"])->name("ShowPostPage");
     Route::post("/dashboard/post",[AdminController::class,"AddPost"])->name("AddPost");
-    Route::post('/dashboard/product/{product}', [AdminController::class,"UpdateProduct"])->name('UpdateProduct');
+    Route::post('/dashboard/post/{id}', [AdminController::class,"UpdatePost"])->name('UpdatePost');
     Route::delete("/dashboard/product",[AdminController::class,"DeleteProduct"])->name("DeleteProduct");
     Route::post("/dashboard/toggle-product",[AdminController::class,"ToggleProduct"])->name("ToggleProduct");
 });

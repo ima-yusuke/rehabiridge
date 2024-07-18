@@ -81,28 +81,20 @@ if(ADD_BUTTON!==null){
     });
 }
 
-
-//商品更新
+//[UPDATE]投稿更新
 document.querySelectorAll('.update-btn').forEach((btn) => {
     btn.addEventListener('click', function() {
-        const ID = btn.getAttribute('data-product-id');
-        const FORM_ELEMENTS = btn.closest('.productForm');
+        const ID = btn.getAttribute('data-post-id');
+        const FORM_ELEMENTS = btn.closest('.postForm');
         const FORM_DATA = new FormData(FORM_ELEMENTS);
 
         // バリデーション
         if(FORM_DATA.get('name').trim() === ""){
-            alert('商品名を入力してください');
+            alert('投稿名を入力してください');
             return;
         }
 
-        // バリデーション
-        const price = FORM_DATA.get('price');
-        if (price === null || price.trim() === "") {
-            alert('価格帯を選択してください');
-            return;
-        }
-
-        FetchData(`/dashboard/product/${ID}`, 'POST',null, FORM_DATA)
+        FetchData(`/dashboard/post/${ID}`, 'POST',null, FORM_DATA)
             .then(data => {
                 alert(data.message);
                 window.location.href = data.redirect;
