@@ -9,6 +9,8 @@ use App\Models\Post;
 
 class AdminController extends Controller
 {
+    //---投稿---
+
     //[SHOW]投稿
     public function ShowPostPage()
     {
@@ -177,6 +179,106 @@ class AdminController extends Controller
             // エラーが発生した場合の処理
             return response()->json([
                 'message' => '表示設定の変更に失敗しました',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    //---カテゴリー---
+
+    //[SHOW]投稿
+    public function ShowCategoryPage()
+    {
+        $posts = Post::where('is_enabled', 1)->get();;
+        $hiddenPosts = Post::where('is_enabled', 0)->get();
+        //$links = Link::all();
+        return view("dash-category",compact("posts","hiddenPosts"));
+    }
+
+    //[ADD]投稿
+    public function AddCategory(Request $request)
+    {
+        // トランザクションの開始
+        DB::beginTransaction();
+
+        try {
+            // アップロードされたファイル名を取得
+            $fileName = $request->file('img')->getClientOriginalName();
+
+            // 商品情報の保存
+            $post = new Post();
+            $post->name = $request->name;
+            $post->img = 'storage/img/' . $fileName;
+            $post->category = $request->category;
+            $post->is_enabled = 1;
+            $post->save();
+
+            // 画像を保存するディレクトリのパスを生成
+            $directoryPath = storage_path('app/public/img/' . $post->id);
+
+            // ディレクトリが存在しない場合は作成し、パーミッションを設定
+            if (!file_exists($directoryPath)) {
+                mkdir($directoryPath, 0755, true);
+                chmod($directoryPath, 0755);
+            }
+
+            // storageに画像ファイル保存
+            $request->file('img')->storeAs('public/img/' . $post->id, $fileName);
+
+            // 画像パスを更新
+            $post->img = 'storage/img/' . $post->id . '/' . $fileName;
+            $post->save();
+
+            // トランザクションのコミット
+            DB::commit();
+
+            // 成功レスポンスを返す
+            return response()->json([
+                'message' => '投稿が正常に追加されました',
+                'redirect' => route('ShowPostPage')
+            ], 200);
+        } catch (\Exception $e) {
+            // トランザクションのロールバック
+            DB::rollback();
+
+            // エラーレスポンスを返す
+            return response()->json([
+                'message' => '投稿追加に失敗しました',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    //[DELETE]投稿
+    public function DeleteCategory(Request $request)
+    {
+        try {
+            // 商品テーブルから指定のIDのレコード1件を取得
+            $post = Post::find($request->id);
+
+            if (!$post) {
+                return response()->json([
+                    'message' => '削除対象の投稿が見つかりませんでした',
+                ], 404);
+            }
+
+            // ディレクトリを削除
+            $directoryPath = 'img/' . $post->id;
+            if (Storage::disk('public')->exists($directoryPath)) {
+                Storage::disk('public')->deleteDirectory($directoryPath);
+            }
+
+            // レコードを削除
+            $post->delete();
+
+            // JSONレスポンスを返す
+            return response()->json([
+                'message' => '投稿が正常に削除されました',
+                'redirect' => route('ShowPostPage')
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => '投稿の削除に失敗しました',
                 'error' => $e->getMessage()
             ], 500);
         }

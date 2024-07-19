@@ -22,6 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/post/{id}', [AdminController::class,"UpdatePost"])->name('UpdatePost');
     Route::delete("/dashboard/post",[AdminController::class,"DeletePost"])->name("DeletePost");
     Route::post("/dashboard/toggle-post",[AdminController::class,"TogglePost"])->name("TogglePost");
+
+    //カテゴリー
+    Route::get("/dashboard/category",[AdminController::class,"ShowCategoryPage"])->name("ShowCategoryPage");
+    Route::post("/dashboard/category",[AdminController::class,"AddCategory"])->name("AddCategory");
+    Route::delete("/dashboard/category",[AdminController::class,"DeleteCategory"])->name("DeleteCategory");
 });
 
 require __DIR__.'/auth.php';

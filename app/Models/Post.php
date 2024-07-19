@@ -17,4 +17,9 @@ class Post extends Model
         'video',
         'is_enabled',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category');
+    }
 }

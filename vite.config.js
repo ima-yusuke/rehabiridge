@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/admin/dash-post.js',
+                'resources/js/admin/dash-category.js',
             ],
             refresh: true,
         }),
@@ -24,7 +25,7 @@ export default defineConfig({
                 app: 'resources/js/app.js',
                 appStyles: 'resources/css/app.css',
                 posts: 'resources/js/admin/dash-post.js',
-
+                categories: 'resources/js/admin/dash-category.js',
             }
         }
     }
