@@ -6,7 +6,7 @@
             </div>
             <aside>
                 <p class="text-sm">{{$value["name"]}}</p>
-                <p class="text-idx-gray text-xs">{{$value["category"]}}</p>
+                <p class="text-idx-gray text-xs">{{$value->categories["category_name"]}}</p>
             </aside>
         </div>
     @endforeach

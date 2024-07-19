@@ -18,7 +18,7 @@ class Post extends Model
         'is_enabled',
     ];
 
-    public function category()
+    public function categories()
     {
         return $this->belongsTo(Category::class, 'category');
     }

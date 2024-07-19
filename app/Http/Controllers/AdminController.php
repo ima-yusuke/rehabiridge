@@ -15,7 +15,7 @@ class AdminController extends Controller
     //[SHOW]投稿
     public function ShowPostPage()
     {
-        $posts = Post::where('is_enabled', 1)->with('category')->get();
+        $posts = Post::where('is_enabled', 1)->with('categories')->get();
         $hiddenPosts = Post::where('is_enabled', 0)->get();
         $categories = Category::all(); // 全てのカテゴリを取得
         return view("dash-post",compact("posts","hiddenPosts","categories"));
