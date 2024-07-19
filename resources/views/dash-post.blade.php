@@ -7,11 +7,11 @@
 
         <div class="flex flex-col items-center w-full">
             {{--新規投稿 --}}
-            <x-dash-new-post />
+            <x-dash-new-post :categories="$categories"/>
 
             <div class="w-full flex flex-col items-center justify-center">
                 {{--既存投稿--}}
-                <x-dash-show-posts :posts="$posts"/>
+                <x-dash-show-posts :posts="$posts" :categories="$categories"/>
             </div>
         </div>
     </div>

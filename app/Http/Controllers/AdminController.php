@@ -17,8 +17,8 @@ class AdminController extends Controller
     {
         $posts = Post::where('is_enabled', 1)->with('category')->get();
         $hiddenPosts = Post::where('is_enabled', 0)->get();
-        //$links = Link::all();
-        return view("dash-post",compact("posts","hiddenPosts"));
+        $categories = Category::all(); // 全てのカテゴリを取得
+        return view("dash-post",compact("posts","hiddenPosts","categories"));
     }
 
     //[ADD]投稿

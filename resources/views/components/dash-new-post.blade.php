@@ -34,15 +34,10 @@
                 <x-required-title title="3.カテゴリー" />
                 <div class="flex-1">
                     <select name="category" class="w-full h-[35px] md:h-full text-xs md:text-base border border-solid border-gray-400 rounded-md">
-                        <option value="0">優先度：低</option>
-                        <option value="3">優先度：中</option>
-                        <option value="5">優先度：高</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category["id"] }}">{{ $category["category_name"] }}</option>
+                        @endforeach
                     </select>
-                    {{--                                <select name="price" class="w-full h-[35px] md:h-full text-xs md:text-base border border-solid border-gray-400 rounded-md">--}}
-                    {{--                                    @foreach($links as $link)--}}
-                    {{--                                        <option value="{{$link["id"]}}">{{$link["course"]}}/{{ $link["price"] }}円</option>--}}
-                    {{--                                    @endforeach--}}
-                    {{--                                </select>--}}
                 </div>
             </div>
 

@@ -46,9 +46,9 @@
                     <p class="md:w-[250px] text-xs md:text-base">3.カテゴリー</p>
                     <div class="flex-1">
                         <select name="category" class="w-full h-[35px] md:h-full text-xs md:text-base border border-solid border-gray-400 rounded-md">
-                            <option value="0" @if($value["category"]==0) selected @endif>優先度：低</option>
-                            <option value="3" @if($value["category"]==3) selected @endif>優先度：中</option>
-                            <option value="5" @if($value["category"]==5) selected @endif>優先度：高</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category["id"] }}" @if($value["category"] == $category["id"]) selected @endif>{{ $category["category_name"] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
