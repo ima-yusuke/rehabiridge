@@ -5,12 +5,14 @@
             <h2 class="text-base pb-4 md:text-xl font-semibold text-gray-800">カテゴリー 一覧</h2>
         </div>
 
-        <div class="flex flex-col items-center w-full">
+        <div class="flex flex-col items-center gap-6 w-full">
             {{--新規投稿 --}}
             <x-dash-new-category/>
 
-            {{--既存投稿--}}
-            <x-dash-show-categories :posts="$posts"/>
+            <div class="w-full flex flex-col items-center justify-center">
+                {{--既存投稿--}}
+                <x-dash-show-categories :categories="$categories"/>
+            </div>
         </div>
     </div>
 

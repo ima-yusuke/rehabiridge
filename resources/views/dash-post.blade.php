@@ -9,8 +9,10 @@
             {{--新規投稿 --}}
             <x-dash-new-post />
 
-            {{--既存投稿--}}
-            <x-dash-show-posts :posts="$posts"/>
+            <div class="w-full flex flex-col items-center justify-center">
+                {{--既存投稿--}}
+                <x-dash-show-posts :posts="$posts"/>
+            </div>
         </div>
     </div>
 
