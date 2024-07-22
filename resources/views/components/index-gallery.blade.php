@@ -1,13 +1,13 @@
 <div class="flex flex-wrap justify-center items-center gap-6 gap-y-20 mt-8">
-    @foreach($posts as $idx=>$value)
-        <div class="flex flex-col gap-2">
+    @foreach($posts as $idx => $value)
+        <a href="/{{ $value["id"] }}" class="story flex flex-col gap-2 cursor-pointer transform transition duration-300 hover:scale-105 shadow-md hover:shadow-lg">
             <div>
-                <img src="{{asset($value['img'])}}" class="w-[310px] h-[200px] object-cover">
+                <img src="{{ asset($value['img']) }}" class="w-[310px] h-[200px] object-cover">
             </div>
-            <aside>
-                <p class="text-sm">{{$value["name"]}}</p>
-                <p class="text-idx-gray text-xs">{{$value->categories["category_name"]}}</p>
+            <aside class="pl-2">
+                <p class="text-sm">{{ $value['name'] }}</p>
+                <p class="text-idx-gray text-xs">{{ $value->categories['category_name'] }}</p>
             </aside>
-        </div>
+        </a>
     @endforeach
 </div>

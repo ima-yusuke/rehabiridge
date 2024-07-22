@@ -15,4 +15,14 @@ class UserController extends Controller
         $categories = Category::all(); // 全てのカテゴリを取得
         return view("index",compact("posts","categories"));
     }
+
+    public function ShowSelectedPage($id)
+    {
+        $selectedPost = Post::with('categories')->find($id);
+        if (!$selectedPost) {
+            return redirect()->route('ShowIndexPage')->with('error', 'Post not found.');
+        }
+
+        return view("selected-post",compact("selectedPost"));
+    }
 }
