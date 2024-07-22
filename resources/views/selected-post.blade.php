@@ -6,8 +6,9 @@
                 @if($selectedPost["pdf"]!=null)
                     <div class="flex gap-6">
                         <div>
-                            <embed src="{{asset($selectedPost["pdf"])}}" type="application/pdf" width="300px" height="300px"/>
-                        </div>
+                            <iframe src="{{ asset($selectedPost['pdf']) }}" width="100%" height="500px" style="border:none;">
+                                このブラウザでは PDF の表示に対応していません。
+                            </iframe>                        </div>
                         <div>
                             <a href="{{asset($selectedPost["pdf"])}}" target="_blank" class="text-blue-600 hover:underline">PDFを表示</a>
                         </div>
