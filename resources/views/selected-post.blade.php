@@ -18,7 +18,7 @@
             </div>
             <div>
                 @if($selectedPost["video"]!=null)
-                    <video src="{{ asset($selectedPost['video']) }}" type="video/mp4" autoplay loop muted playsinline controls class="w-full h-[300px] object-cover">
+                    <video src="{{ asset($selectedPost['video']) }}" type="video/mp4" loop muted playsinline controls class="w-full h-[300px] object-cover">
                         お使いのブラウザは動画タグに対応していません。
                     </video>
                 @endif
