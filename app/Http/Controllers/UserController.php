@@ -25,4 +25,15 @@ class UserController extends Controller
 
         return view("selected-post",compact("selectedPost"));
     }
+
+    public function SearchedPage($id)
+    {
+        $posts = Post::where('category', $id)
+            ->where('is_enabled', 1)
+            ->with('categories')
+            ->get();
+        $categories = Category::all(); // 全てのカテゴリを取得
+        $clear = true;
+        return view("index",compact("posts","categories","clear"));
+    }
 }

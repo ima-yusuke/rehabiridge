@@ -5,8 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
+//Indexページ
 Route::get('/', [UserController::class, 'ShowIndexPage'])->name('ShowIndexPage');
+//各投稿へ遷移
 Route::get('/detail/{id}', [UserController::class, 'ShowSelectedPage'])->name('ShowSelectedPage');
+//カテゴリー検索
+Route::get('/search/{id}', [UserController::class, 'SearchedPage'])->name('SearchedPage');
+//カテゴリークリア
+Route::get('/clear', [UserController::class, 'ShowIndexPage'])->name('ShowIndexPage');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

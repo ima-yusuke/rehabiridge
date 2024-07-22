@@ -10,8 +10,14 @@
             <h3 class="text-sm">Category</h3>
             <div class="text-idx-gray text-xs w-full grid grid-cols-2 gap-x-8 gap-y-1">
                 @foreach($categories as $category)
-                    <p class="hover:text-white hover:cursor-pointer">{{ $category["category_name"] }}</p>
+                    <a href="/search/{{ $category["id"]}}" class="hover:text-white hover:cursor-pointer">{{ $category["category_name"] }}</a>
                 @endforeach
+
+                @if($clear!=null)
+                    <a href="/clear" class="cursor-pointer text-red-400">
+                        <button>Clear</button>
+                    </a>
+                @endif
             </div>
         </div>
     </div>
