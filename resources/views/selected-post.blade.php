@@ -1,7 +1,11 @@
 <x-template title="RehaBiridge">
     <div class="flex justify-center items-center my-8 md:my-0 md:h-screen">
         <div class="bg-white rounded-2xl flex flex-col items-center justify-center gap-8 md:gap-16 pt-8 h-[90vh] w-[90%] md:w-[80%] md:relative">
-            <h1 class="text-2xl font-bold md:absolute md:top-8">{{$selectedPost["name"]}}</h1>
+            <div class="flex flex-col items-center gap-8 md:absolute md:top-12">
+                <h1 class="text-3xl md:text-4xl font-bold">{{$selectedPost["name"]}}</h1>
+                <p class="border-b-2 border-solid border-black w-[80px]"></p>
+                <p class="text-idx-gray text-xs">{{$selectedPost->categories["category_name"]}}</p>
+            </div>
             <div>
                 @if($selectedPost["pdf"]!=null)
                     <div class="flex gap-6">

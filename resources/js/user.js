@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('fade-in');
                 observer.unobserve(entry.target); // アニメーション後に監視を停止する
+
+                setTimeout(() => {
+                    entry.target.classList.remove('fade-in');
+                    entry.target.style.transform = ''; // 一度アニメーションが終わった要素を元の位置に戻す
+                    entry.target.style.opacity = '1'; // 一度アニメーションが終わった要素を元の透明度に戻す
+                },2000);
             }
         });
     }, observerOptions);

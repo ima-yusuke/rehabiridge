@@ -25,6 +25,15 @@
     animation: fadeIn 2s forwards;
 }
 
+/* 投稿hover時のアニメーション*/
+.story{
+    transition: transform 0.7s ease;
+}
+
+.story:hover{
+    transform: scale(0.90); /* 90%に縮小 */
+}
+
 
 /*-----管理画面-----*/
 .editBtn {

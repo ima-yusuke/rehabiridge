@@ -1,6 +1,6 @@
 <div class="flex flex-wrap justify-center items-center gap-6 gap-y-10 md:gap-y-20 my-8">
     @foreach($posts as $idx => $value)
-        <a href="/detail/{{ $value['id'] }}" class="story rounded-lg flex flex-col gap-2 cursor-pointer transform transition duration-300 hover:scale-105 shadow-md hover:shadow-lg">
+        <a href="/detail/{{ $value['id'] }}" class="story test rounded-lg flex flex-col gap-2 cursor-pointer shadow-md">
             <div>
                 <img src="{{ asset($value['img']) }}" class="rounded-t-lg w-[310px] h-[200px] object-cover">
             </div>
