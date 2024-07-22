@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', [UserController::class, 'ShowIndexPage'])->name('ShowIndexPage');
-Route::get('/{id}', [UserController::class, 'ShowSelectedPage'])->name('ShowSelectedPage');
+Route::get('/detail/{id}', [UserController::class, 'ShowSelectedPage'])->name('ShowSelectedPage');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
