@@ -30,6 +30,7 @@
                     <input id="new_product_name" name="name" class="w-full h-[35px] md:h-full border border-solid border-gray-400 rounded-md" required />
                 </div>
             </div>
+
             <div class="flex flex-col md:flex-row md:items-center gap-4 border-y border-solid border-gray-200 py-4">
                 <x-required-title title="3.カテゴリー" />
                 <div class="flex-1">
@@ -38,6 +39,20 @@
                             <option value="{{ $category["id"] }}">{{ $category["category_name"] }}</option>
                         @endforeach
                     </select>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-y border-solid border-gray-200 py-4">
+                <x-required-title title="4.PDFファイル" />
+                <div class="flex-1">
+                    <input type="file" accept="application/pdf" name="pdf" id="pdf" class="w-full text-xs h-[35px] md:h-full border border-solid border-gray-400 rounded-md" />
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-y border-solid border-gray-200 py-4">
+                <x-required-title title="5.動画" />
+                <div class="flex-1">
+                    <input type="file" accept="video/*" name="video" id="video" class="w-full text-xs h-[35px] md:h-full border border-solid border-gray-400 rounded-md" />
                 </div>
             </div>
 

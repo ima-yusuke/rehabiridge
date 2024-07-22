@@ -52,6 +52,43 @@
                         </select>
                     </div>
                 </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-y border-solid border-gray-200 py-4">
+                    <p class="md:w-[250px] text-xs md:text-base">4.PDFファイル</p>
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-16">
+                        <aside class="flex flex-col md:items-center gap-2">
+                            <p class="text-xs md:text-base">【現在のPDF】</p>
+                            @if($value->pdf)
+                                <a href="{{ asset($value->pdf) }}" target="_blank" class="text-blue-600 hover:underline">PDFを表示</a>
+                            @else
+                                <p class="text-xs md:text-base">なし</p>
+                            @endif
+                        </aside>
+                        <aside class="flex flex-col gap-2">
+                            <p class="text-xs md:text-base">【新しいPDF】</p>
+                            <input type="file" accept="application/pdf" name="pdf" class="w-full text-xs h-[35px] md:h-full">
+                        </aside>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-y border-solid border-gray-200 py-4">
+                    <p class="md:w-[250px] text-xs md:text-base">5.動画ファイル</p>
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-16">
+                        <aside class="flex flex-col md:items-center gap-2">
+                            <p class="text-xs md:text-base">【現在の動画】</p>
+                            @if($value->video)
+                                <video width="100" controls>
+                                    <source src="{{ asset($value->video) }}" type="video/mp4">
+                                    お使いのブラウザは動画タグに対応していません。
+                                </video>
+                            @else
+                                <p class="text-xs md:text-base">なし</p>
+                            @endif
+                        </aside>
+                        <aside class="flex flex-col gap-2">
+                            <p class="text-xs md:text-base">【新しい動画】</p>
+                            <input type="file" accept="video/mp4" name="video" class="w-full text-xs h-[35px] md:h-full">
+                        </aside>
+                    </div>
+                </div>
                 <div class="flex justify-center mt-4">
                     <button type="button" data-post-id="{{$value["id"]}}" class="submit-btn update-btn btn-border shadow-xl text-sm px-10 py-3 text-center">
                         更新

@@ -29,30 +29,56 @@ class AdminController extends Controller
 
         try {
             // アップロードされたファイル名を取得
-            $fileName = $request->file('img')->getClientOriginalName();
+            $imgFileName = $request->file('img')->getClientOriginalName();
+            $pdfFileName = $request->file('pdf')->getClientOriginalName();
+            $videoFileName = $request->file('video')->getClientOriginalName();
 
             // 商品情報の保存
             $post = new Post();
             $post->name = $request->name;
-            $post->img = 'storage/img/' . $fileName;
+            $post->img = 'storage/img/' .  $imgFileName;
             $post->category = $request->category;
             $post->is_enabled = 1;
             $post->save();
 
             // 画像を保存するディレクトリのパスを生成
-            $directoryPath = storage_path('app/public/img/' . $post->id);
+            $imgDirectoryPath = storage_path('app/public/img/' . $post->id);
 
             // ディレクトリが存在しない場合は作成し、パーミッションを設定
-            if (!file_exists($directoryPath)) {
-                mkdir($directoryPath, 0755, true);
-                chmod($directoryPath, 0755);
+            if (!file_exists($imgDirectoryPath)) {
+                mkdir($imgDirectoryPath, 0755, true);
+                chmod($imgDirectoryPath, 0755);
             }
 
             // storageに画像ファイル保存
-            $request->file('img')->storeAs('public/img/' . $post->id, $fileName);
+            $request->file('img')->storeAs('public/img/' . $post->id,  $imgFileName);
 
             // 画像パスを更新
-            $post->img = 'storage/img/' . $post->id . '/' . $fileName;
+            $post->img = 'storage/img/' . $post->id . '/' .  $imgFileName;
+
+            //---------
+            $pdfDirectoryPath = storage_path('app/public/pdf/' . $post->id);
+
+            if (!file_exists($pdfDirectoryPath)) {
+                mkdir($pdfDirectoryPath, 0755, true);
+                chmod($pdfDirectoryPath, 0755);
+            }
+
+            $request->file('pdf')->storeAs('public/pdf/' . $post->id, $pdfFileName);
+
+            $post->pdf = 'storage/pdf/' . $post->id . '/' . $pdfFileName;
+
+            //---------
+            $videoDirectoryPath = storage_path('app/public/video/' . $post->id);
+
+            if (!file_exists($videoDirectoryPath)) {
+                mkdir($videoDirectoryPath, 0755, true);
+                chmod($videoDirectoryPath, 0755);
+            }
+
+            $request->file('video')->storeAs('public/video/' . $post->id, $videoFileName);
+
+            $post->video = 'storage/video/' . $post->id . '/' . $videoFileName;
             $post->save();
 
             // トランザクションのコミット
@@ -101,6 +127,40 @@ class AdminController extends Controller
                 // 新しい画像を保存
                 $request->file('img')->storeAs($newImgPath, $fileName);
                 $post->img = 'storage/img/' . $post->id . '/' . $fileName;
+            }
+
+            // PDFの更新処理
+            if ($request->hasFile('pdf')) {
+                $fileName = $request->file('pdf')->getClientOriginalName();
+                $newPdfPath = 'public/pdf/' . $post->id;
+
+                Storage::disk('public')->deleteDirectory('pdf/' . $post->id);
+
+                $directoryPath = storage_path('app/public/pdf/' . $post->id);
+                if (!file_exists($directoryPath)) {
+                    mkdir($directoryPath, 0755, true);
+                    chmod($directoryPath, 0755);
+                }
+
+                $request->file('pdf')->storeAs($newPdfPath, $fileName);
+                $post->pdf = 'storage/pdf/' . $post->id . '/' . $fileName;
+            }
+
+            // Videoの更新処理
+            if ($request->hasFile('video')) {
+                $fileName = $request->file('video')->getClientOriginalName();
+                $newVideoPath = 'public/video/' . $post->id;
+
+                Storage::disk('public')->deleteDirectory('video/' . $post->id);
+
+                $directoryPath = storage_path('app/public/video/' . $post->id);
+                if (!file_exists($directoryPath)) {
+                    mkdir($directoryPath, 0755, true);
+                    chmod($directoryPath, 0755);
+                }
+
+                $request->file('video')->storeAs($newVideoPath, $fileName);
+                $post->video = 'storage/video/' . $post->id . '/' . $fileName;
             }
 
             $post->name = $request->name;

@@ -5,7 +5,7 @@
             <h2 class="text-base pb-4 md:text-xl font-semibold text-gray-800">表示投稿一覧</h2>
         </div>
 
-        <div class="flex flex-col items-center w-full">
+        <div class="flex flex-col items-center gap-6 w-full">
             {{--新規投稿 --}}
             <x-dash-new-post :categories="$categories"/>
 
