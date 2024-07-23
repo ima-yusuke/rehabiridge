@@ -19,18 +19,18 @@ class AdminController extends Controller
     public function ShowPostPage()
     {
 
-//        // ロール作成
-//        $adminRole = Role::create(['name' => 'admin']);
-//
-//        // 権限作成
-//        $editAllUserPermission = Permission::create(['name' => 'edit all user']);
-//
-//        // member役割にregister権限を付与
-//        $adminRole->givePermissionTo($editAllUserPermission);
-//
-//        $user = User::find(1);
-//        // $userにadminを割り当て
-//        $user->assignRole($adminRole);
+        // ロール作成
+        $adminRole = Role::create(['name' => 'admin']);
+
+        // 権限作成
+        $editAllUserPermission = Permission::create(['name' => 'edit all user']);
+
+        // member役割にregister権限を付与
+        $adminRole->givePermissionTo($editAllUserPermission);
+
+        $user = User::find(1);
+        // $userにadminを割り当て
+        $user->assignRole($adminRole);
 
         $posts = Post::where('is_enabled', 1)->with('categories')->get();
         $hiddenPosts = Post::where('is_enabled', 0)->get();
