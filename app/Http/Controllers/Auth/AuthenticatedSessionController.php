@@ -28,7 +28,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // ログインユーザーを取得
+        $user = Auth::user();
+
+        // ロールに基づいてリダイレクト先を決定
+        if ($user->hasRole('admin')) {
+            return redirect()->intended(route('dashboard'));
+        } elseif ($user->hasRole('member')) {
+            return redirect()->route('ShowIndexPage');
+        };
+
+        // デフォルトのリダイレクト先
+        return redirect()->route('dashboard');
     }
 
     /**
