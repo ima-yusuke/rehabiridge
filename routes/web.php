@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get("/dashboard/category",[AdminController::class,"ShowCategoryPage"])->name("ShowCategoryPage");
     Route::post("/dashboard/category",[AdminController::class,"AddCategory"])->name("AddCategory");
     Route::delete("/dashboard/category",[AdminController::class,"DeleteCategory"])->name("DeleteCategory");
+
+    //ユーザー
+    Route::get("/dashboard/member",[AdminController::class,"ShowMemberPage"])->name("ShowMemberPage");
 });
 
 require __DIR__.'/auth.php';
