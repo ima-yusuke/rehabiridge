@@ -13,7 +13,8 @@ class UserController extends Controller
     {
         $posts = Post::where('is_enabled', 1)->with('categories')->get();
         $categories = Category::all(); // 全てのカテゴリを取得
-        return view("index",compact("posts","categories"));
+        $latestPost = Post::orderBy('updated_at', 'desc')->first();// 最新の更新日時を持つレコードを取得
+        return view("index",compact("posts","categories","latestPost"));
     }
 
     public function ShowSelectedPage($id)
@@ -33,7 +34,8 @@ class UserController extends Controller
             ->with('categories')
             ->get();
         $categories = Category::all(); // 全てのカテゴリを取得
+        $latestPost = Post::orderBy('updated_at', 'desc')->first();// 最新の更新日時を持つレコードを取得
         $clear = true;
-        return view("index",compact("posts","categories","clear"));
+        return view("index",compact("posts","categories","latestPost","clear"));
     }
 }

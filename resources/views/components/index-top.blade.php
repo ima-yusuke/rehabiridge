@@ -16,6 +16,6 @@
             <p>▷治せるセラピストになるための臨床に役立つ知識を発信</p>
             <p>▷学生・新人さんのお悩み相談所</p>
         </div>
-        <p class="text-idx-gray text-xs text-end absolute bottom-2 border-t border-solid border-black pt-4 w-full">UPDATE: 2024. 03 . 01</p>
+        <p class="text-idx-gray text-xs text-end absolute bottom-2 border-t border-solid border-black pt-4 w-full">UPDATE:{{$latestPost["updated_at"]->format('Y.m.d') }}</p>
     </div>
 </div>
