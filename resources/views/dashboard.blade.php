@@ -1,5 +1,4 @@
 <x-app-layout>
-    @hasanyrole('admin')
     <div class="py-12 flex flex-wrap gap-4 justify-center items-center">
         <div class="flex flex-col justify-center items-center shadow-xl text-center border-4 border-solid border-black bg-white w-[40%] md:w-[30%]">
             <a href="{{route("ShowPostPage")}}" class="w-full h-full hover:bg-black hover:text-white p-3">
@@ -26,5 +25,4 @@
             </a>
         </div>
     </div>
-    @endhasanyrole
 </x-app-layout>

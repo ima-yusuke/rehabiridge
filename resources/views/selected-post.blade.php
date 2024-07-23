@@ -6,6 +6,7 @@
                 <p class="border-b-2 border-solid border-black w-[80px]"></p>
                 <p class="text-idx-gray text-xs">{{$selectedPost->categories["category_name"]}}</p>
             </div>
+            @can('read')
             <div>
                 @if($selectedPost["pdf"]!=null)
                     <div class="flex gap-6">
@@ -27,6 +28,10 @@
                     </video>
                 @endif
             </div>
+            @endcan
+            @cannot('read')
+                <h1><a href="/login" class="text-blue-500">こちら</a>からログインしてください</h1>
+            @endcannot
         </div>
     </div>
 </x-template>
