@@ -14,7 +14,7 @@
                 @endforeach
 
                 @if($clear!=null)
-                    <a href="/clear" class="cursor-pointer text-red-400">
+                    <a href="/" class="cursor-pointer text-red-400">
                         <button>Clear</button>
                     </a>
                 @endif

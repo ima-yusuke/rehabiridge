@@ -11,8 +11,6 @@ Route::get('/', [UserController::class, 'ShowIndexPage'])->name('ShowIndexPage')
 Route::get('/detail/{id}', [UserController::class, 'ShowSelectedPage'])->name('ShowSelectedPage');
 //カテゴリー検索
 Route::get('/search/{id}', [UserController::class, 'SearchedPage'])->name('SearchedPage');
-//カテゴリークリア
-Route::get('/clear', [UserController::class, 'ShowIndexPage'])->name('ShowIndexPage');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
