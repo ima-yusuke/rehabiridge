@@ -35,6 +35,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     //ユーザー
     Route::get("/dashboard/member",[AdminController::class,"ShowMemberPage"])->name("ShowMemberPage");
+    Route::post("/dashboard/toggle-permission",[AdminController::class,"TogglePermission"])->name("TogglePermission");
 });
 
 require __DIR__.'/auth.php';

@@ -339,4 +339,56 @@ class AdminController extends Controller
         $users = User::where('id', '!=', 1)->get();
         return view("dash-member",compact("users"));
     }
+
+    public function TogglePermission(Request $request)
+    {
+        // トランザクション開始
+        DB::beginTransaction();
+
+        try {
+            $user = User::find($request["id"]);
+
+            if ($request["is_enabled"] == 0) {
+                $user->removeRole('member');
+                DB::commit();
+                return response()->json([
+                    'message' => 'メンバーの権限が削除されました',
+                    'redirect' => route('ShowMemberPage')
+                ]);
+            }
+
+            // 'member' ロールが存在するか確認、存在しない場合は作成
+            $memberRole = Role::firstOrCreate(['name' => 'member']);
+
+            // 'read' 権限が存在するか確認、存在しない場合は作成
+            $readPermission = Permission::firstOrCreate(['name' => 'read']);
+
+            // 'member' ロールに 'read' 権限を付与
+            if (!$memberRole->hasPermissionTo($readPermission)) {
+                $memberRole->givePermissionTo($readPermission);
+            }
+
+            // ユーザーに 'member' ロールを割り当て
+            if (!$user->hasRole('member')) {
+                $user->assignRole($memberRole);
+            }
+
+            // トランザクションをコミット
+            DB::commit();
+
+            return response()->json([
+                'message' => 'メンバーの権限が追加されました',
+                'redirect' => route('ShowMemberPage')
+            ]);
+        } catch (\Exception $e) {
+            // エラーが発生した場合、トランザクションをロールバック
+            DB::rollBack();
+
+            // エラーレスポンスを返す
+            return response()->json([
+                'error' => '操作に失敗しました。もう一度お試しください。',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
