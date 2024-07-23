@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Spatie\Permission\Models\Role; // 追加
+use Spatie\Permission\Models\Permission; // 追加
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -40,6 +42,20 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        // 'member' ロールが存在するか確認、存在しない場合は作成
+        $memberRole = Role::firstOrCreate(['name' => 'member']);
+
+        // 'read' 権限が存在するか確認、存在しない場合は作成
+        $readPermission = Permission::firstOrCreate(['name' => 'read']);
+
+        // 'member' ロールに 'read' 権限を付与
+        if (!$memberRole->hasPermissionTo($readPermission)) {
+            $memberRole->givePermissionTo($readPermission);
+        }
+
+        // ユーザーに 'member' ロールを割り当て
+        $user->assignRole($memberRole);
 
         event(new Registered($user));
 

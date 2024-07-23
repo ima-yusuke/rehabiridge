@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\Category;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -15,6 +18,20 @@ class AdminController extends Controller
     //[SHOW]投稿
     public function ShowPostPage()
     {
+
+//        // ロール作成
+//        $adminRole = Role::create(['name' => 'admin']);
+//
+//        // 権限作成
+//        $editAllUserPermission = Permission::create(['name' => 'edit all user']);
+//
+//        // member役割にregister権限を付与
+//        $adminRole->givePermissionTo($editAllUserPermission);
+//
+//        $user = User::find(1);
+//        // $userにadminを割り当て
+//        $user->assignRole($adminRole);
+
         $posts = Post::where('is_enabled', 1)->with('categories')->get();
         $hiddenPosts = Post::where('is_enabled', 0)->get();
         $categories = Category::all(); // 全てのカテゴリを取得
@@ -314,5 +331,12 @@ class AdminController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    //---メンバー---
+    public function ShowMemberPage()
+    {
+        $users = User::where('id', '!=', 1)->get();
+        return view("dash-member",compact("users"));
     }
 }
