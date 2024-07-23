@@ -10,6 +10,7 @@ export default defineConfig({
                 "resources/js/user.js",
                 'resources/js/admin/dash-post.js',
                 'resources/js/admin/dash-category.js',
+                'resources/js/admin/dash-member.js',
             ],
             refresh: true,
         }),
@@ -28,6 +29,7 @@ export default defineConfig({
                 user: 'resources/js/user.js',
                 posts: 'resources/js/admin/dash-post.js',
                 categories: 'resources/js/admin/dash-category.js',
+                members: 'resources/js/admin/dash-member.js'
             }
         }
     }
