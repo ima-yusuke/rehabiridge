@@ -34,12 +34,9 @@ class AuthenticatedSessionController extends Controller
         // ロールに基づいてリダイレクト先を決定
         if ($user->hasRole('admin')) {
             return redirect()->intended(route('dashboard'));
-        } elseif ($user->hasRole('member')) {
+        } else{
             return redirect()->route('ShowIndexPage');
-        };
-
-        // デフォルトのリダイレクト先
-        return redirect()->route('dashboard');
+        }
     }
 
     /**
