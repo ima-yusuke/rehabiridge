@@ -11,4 +11,4 @@
         </a>
     @endforeach
 </div>
-@vite("resources/js/user.js")
+

@@ -33,7 +33,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post("/dashboard/category",[AdminController::class,"AddCategory"])->name("AddCategory");
     Route::delete("/dashboard/category",[AdminController::class,"DeleteCategory"])->name("DeleteCategory");
 
-    //ユーザー
+    //会員
     Route::get("/dashboard/member",[AdminController::class,"ShowMemberPage"])->name("ShowMemberPage");
     Route::post("/dashboard/toggle-permission",[AdminController::class,"TogglePermission"])->name("TogglePermission");
 });

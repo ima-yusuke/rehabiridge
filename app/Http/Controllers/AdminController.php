@@ -334,12 +334,15 @@ class AdminController extends Controller
     }
 
     //---メンバー---
+
+    //[SHOW]メンバー
     public function ShowMemberPage()
     {
         $users = User::where('id', '!=', 1)->get();
         return view("dash-member",compact("users"));
     }
 
+    //[TOGGLE]メンバー（権限）
     public function TogglePermission(Request $request)
     {
         // トランザクション開始
