@@ -1,5 +1,5 @@
 const HAMBURGER_ICON = document.getElementById('hamburger_icon');
-
+const CLOSE_ICON = document.getElementById('close_icon');
 
 // 投稿表示アニメーション
 document.addEventListener("DOMContentLoaded", function() {
@@ -27,11 +27,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+let side_menu = document.getElementsByClassName("side_menu_off")[0];
+let main = document.getElementsByTagName("body")[0];
+
 //サイドメニュー表示
 HAMBURGER_ICON.addEventListener('click', function() {
-    // 画面背景色グレーに
-    let screen_cover = document.getElementsByClassName("screen_cover")[0];
-    screen_cover.classList.add("popup-bg-cover");
+
+    HAMBURGER_ICON.classList.add("hidden")
+    CLOSE_ICON.classList.remove("hidden")
 
     // サイドメニュー表示
     side_menu.classList.remove("side_menu_off")
@@ -41,20 +44,16 @@ HAMBURGER_ICON.addEventListener('click', function() {
     main.classList.add("scroll_none")
 })
 
-let side_menu = document.getElementsByClassName("side_menu_off")[0];
-let main = document.getElementsByTagName("body")[0];
-
-
-
 // メニューのいずれかもしくは✗クリック時に画面グレー&サイドメニュー非表示
 let side_li = document.getElementsByClassName("side_li");
 for(let i= 0; i<side_li.length;i++){
     side_li[i].addEventListener("click",function (e){
-        let screen_cover = document.getElementsByClassName("screen_cover")[0];
-        screen_cover.classList.remove("popup-bg-cover");
 
         side_menu.classList.remove("side_menu_show")
         side_menu.classList.add("side_menu_off")
+
+        HAMBURGER_ICON.classList.remove("hidden")
+        CLOSE_ICON.classList.add("hidden")
 
         main.classList.remove("scroll_none")
     })
@@ -62,12 +61,13 @@ for(let i= 0; i<side_li.length;i++){
 
 // サイドメニューの外をクリックしたらサイドメニュー閉じる
 document.addEventListener("click",function (e){
-    if((!e.target.closest('div.side_wrapper'))&& e.target!==hamburger) {
-        let screen_cover = document.getElementsByClassName("screen_cover")[0];
-        screen_cover.classList.remove("popup-bg-cover");
+    if((!e.target.closest('div.side_wrapper'))&& e.target!==HAMBURGER_ICON) {
 
         side_menu.classList.remove("side_menu_show")
         side_menu.classList.add("side_menu_off")
+
+        HAMBURGER_ICON.classList.remove("hidden")
+        CLOSE_ICON.classList.add("hidden")
 
         main.classList.remove("scroll_none")
     }

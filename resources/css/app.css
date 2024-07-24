@@ -36,60 +36,54 @@
 
 /*サイドバー*/
 
-/*サイドバー表示時の画面全体背景色*/
-.popup-bg-cover{
-    position: fixed; /* ブラウザの定位置に固定 */
-    background: rgba(0, 0, 0, .5); /* 背景色を半透明の黒色に */
-    width: 100%; /* 要素の横幅を画面全体に */
-    height: 100%; /* 要素の高さを画面全体に */
-    top: 0; /* 要素の固定位置をブラウザ最上部に合わせる */
-    left: 0; /* 要素の固定位置をブラウザ左側に合わせる */
-    z-index: 50; /* 要素をコンテンツより前面に（要調整） */
-}
-
-
 .side_menu_off{
-    background:white;
-    width: 250px;
+    background: rgba(0, 0, 0, .7);
+    width: 90%;
     height: 100%;
     position: fixed;
-    left: -250px;
+    right: -90%;
     top: 0;
     transition-duration: 0.6s;
-    z-index: 100;
+    z-index: 30;
 }@media screen and (min-width:600px){
     .side_menu_off {
-        background: white;
-        width: 350px;
+        background: rgba(0, 0, 0, .7);
+        width: 50%;
         height: 100%;
         position: fixed;
-        left: -350px;
+        right: -50%;
         top: 0;
         transition-duration: 0.6s;
-        z-index: 100;
+        z-index: 30;
     }
 }
 
 .side_menu_show{
-    background:white;
-    width: 250px;
+    background: rgba(0, 0, 0, .7);
+    width: 90%;
     height: 100%;
     position: fixed;
-    left: 0;
+    right: 0;
     top: 0;
     transition-duration: 0.6s;
-    z-index: 100;
+    z-index: 30;
 }@media screen and (min-width:600px){
     .side_menu_show {
-        background: white;
-        width: 350px;
+        background: rgba(0, 0, 0, .7);
+        width: 50%;
         height: 100%;
         position: fixed;
-        left: 0;
+        right: 0;
         top: 0;
         transition-duration: 0.6s;
-        z-index: 100;
+        z-index: 30;
     }
+}
+
+#close_icon{
+    position: fixed;
+    z-index: 50;
+    color: white;
 }
 
 .scroll_none{

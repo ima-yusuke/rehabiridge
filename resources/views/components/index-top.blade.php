@@ -1,4 +1,5 @@
 <i id="hamburger_icon" class="fa-solid fa-bars fixed right-4 md:right-6 top-4 md:top-6 text-2xl md:text-4xl cursor-pointer"></i>
+<i id="close_icon" class="hidden z-50 fa-solid fa-xmark fixed right-4 md:right-6 top-4 md:top-6 text-2xl md:text-4xl cursor-pointer"></i>
 <div class="flex justify-center gap-4 mt-16">
     {{--左側--}}
     <div class="flex flex-col gap-6 w-[45%] h-[250px] border-b-4 border-solid border-black">
