@@ -339,7 +339,7 @@ class AdminController extends Controller
     public function ShowMemberPage()
     {
         $users = User::where('id', '!=', 1)->get();
-        return view("dash-member",compact("users"));
+ ;       return view("dash-member",compact("users"));
     }
 
     //[TOGGLE]メンバー（権限）

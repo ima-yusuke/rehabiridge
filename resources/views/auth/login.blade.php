@@ -13,7 +13,7 @@
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mt-6">
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
@@ -26,8 +26,8 @@
         </div>
 
         <!-- Login Button -->
-        <div class="flex justify-center items-center my-4">
-            <button type="submit" class="bg-gray-900 py-2 px-8 text-white rounded-lg">Login</button>
+        <div class="flex justify-center items-center mt-6">
+            <button type="submit" class="bg-gray-900 py-2 px-8 text-white rounded-lg">ログイン</button>
         </div>
 
         <!-- Forgot Password -->
