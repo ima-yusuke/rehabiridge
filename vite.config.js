@@ -28,7 +28,6 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 app: 'resources/js/app.js',
-                admin: 'resources/js/admin.js',
                 sideMenu: 'resources/css/side-menu.css',
                 userPosts: 'resources/css/posts.css',
                 appStyles: 'resources/css/app.css',
