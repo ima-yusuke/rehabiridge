@@ -4,7 +4,13 @@
     </div>
 
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    @props(['status'])
+
+    @if (session('status'))
+        <div {{ $attributes->merge(['class' => 'mb-4 font-medium text-sm text-green-600']) }}>
+           メールを送信しました。
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
