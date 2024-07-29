@@ -1,0 +1,32 @@
+/*投稿アニメーション表示*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.story{
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+/* 投稿hover時のアニメーション*/
+.story{
+    transition: transform 0.7s ease;
+}
+
+.story:hover{
+    transform: scale(0.90); /* 90%に縮小 */
+}
+
+
+

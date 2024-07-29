@@ -6,6 +6,9 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                'resources/css/admin.css',
+                'resources/css/side-menu.css',
+                'resources/css/posts.css',
                 'resources/js/app.js',
                 "resources/js/user.js",
                 'resources/js/admin/dash-post.js',
@@ -25,9 +28,12 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 app: 'resources/js/app.js',
+                admin: 'resources/js/admin.js',
+                sideMenu: 'resources/css/side-menu.css',
+                userPosts: 'resources/css/posts.css',
                 appStyles: 'resources/css/app.css',
                 user: 'resources/js/user.js',
-                posts: 'resources/js/admin/dash-post.js',
+                adminPosts: 'resources/js/admin/dash-post.js',
                 categories: 'resources/js/admin/dash-category.js',
                 members: 'resources/js/admin/dash-member.js'
             }

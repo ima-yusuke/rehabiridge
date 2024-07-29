@@ -1,0 +1,20 @@
+
+/*-----管理画面-----*/
+.editBtn {
+    cursor: pointer;
+}
+
+/*アコーディオン*/
+.qa__body {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.6s ease; /* 高さと透明度の変化をアニメーション化 */
+}
+
+.qa__body.visible {
+    max-height: 1000px; /* 表示されるときの最大の高さ */
+    opacity: 1;
+    padding: 20px;
+    line-height: 1.5;
+}
